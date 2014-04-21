@@ -13,6 +13,8 @@ A solver for the [Ruzzle][1] game, written in Clojure.
 - For a 4x4 board, the `board_size` is 4.
 - Enter `board` as a string of capital letters.
 
+## Example
+
 ![Example Ruzzle Board](https://raw.githubusercontent.com/timothyandrew/ruzzle-solver/master/resources/example.png)
 
 - For this board, you would run the solver with:
