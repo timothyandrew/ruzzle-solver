@@ -6,4 +6,5 @@
 (defn -main
   [size collapsed-board & args]
   (let [board (vec (map vec (partition (Integer. size) (s/split collapsed-board #""))))]
-    (dorun (ruzzle.solver/solve board))))
+    (ruzzle.solver/solve board)
+    (shutdown-agents)))

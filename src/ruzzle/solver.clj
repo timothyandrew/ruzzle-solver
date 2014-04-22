@@ -16,7 +16,8 @@
   ([board solutions]
      (let [size (count board)
            starting-points (for [x (range size) y (range size)] [x y])]
-       (map #(find-words board %) starting-points))))
+       (dorun (map deref
+                   (doall (map #(future (find-words board %)) starting-points)))))))
 
 (def get-from-board get-in)
 
