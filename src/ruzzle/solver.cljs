@@ -1,30 +1,31 @@
 (ns ruzzle.solver
-  (require [clojure.string :as s]
-           [clojure.set :as set]))
+  (:require [clojure.string :as s]
+            [clojure.set :as set]))
 
 (declare find-words)
 
 (def word-list
-  (let [word-list (s/split (slurp "resources/TWL06.txt") #"\r\n")]
+  (let [word-list ["RAT"]]
     (reduce (fn [dict word]
               (assoc dict word true))
             {}
             word-list)))
+
+
 
 (defn solve
   ([board] (solve board #()))
   ([board solutions]
      (let [size (count board)
            starting-points (for [x (range size) y (range size)] [x y])]
-       (dorun (map deref
-                   (doall (map #(future (find-words board %)) starting-points)))))))
+       (dorun (map #(find-words board %) starting-points)))))
 
 (def get-from-board get-in)
 
 (defn valid-word? [word]
   (if (contains? word-list word)
     (do
-      (when (> (count word) 3) (println word))
+      (when (> (count word) 1) (println "Found: " word))
       true)
     false))
 
